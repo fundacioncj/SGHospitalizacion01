@@ -1,0 +1,22 @@
+services:
+  mongodb:
+    image: mongo:7.0
+    container_name: mongo_sg_hospitalizacion
+    environment:
+      MONGO_INITDB_DATABASE: sg_hospitalizacion
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+    networks:
+      - sghospitalizacion_net
+
+volumes:
+  mongo_data:
+    name: sghospitalizacion_mongo_data
+
+networks:
+  sghospitalizacion_net:
+    name: sghospitalizacion_net
+    driver: bridge
